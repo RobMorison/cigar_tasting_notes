@@ -7,10 +7,16 @@ from .models import Scores
 
 # Create your views here.
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def scores_list(request):
 
     if request.method == 'GET':
         queryset = Scores.objects.all()
         serializer = ScoresSerializer(queryset, many=True)
         return Response(serializer.data)
+    
+    elif request.method == 'POST':
+        serializer = ScoresSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status = status.HTTP_201_CREATED)
