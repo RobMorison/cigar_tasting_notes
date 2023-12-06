@@ -7,10 +7,16 @@ from .models import Cigar
 
 # Create your views here.
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def cigar_list(request):
 
     if request.method == 'GET':
         queryset = Cigar.objects.all()
         serializer = CigarSerializer(queryset, many=True)
         return Response(serializer.data)
+    
+    elif request.method == 'POST':
+        serializer = CigarSerializer(data = request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status = status.HTTP_201_CREATED)
