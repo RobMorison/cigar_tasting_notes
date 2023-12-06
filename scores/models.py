@@ -1,4 +1,5 @@
 from django.db import models
+from cigar.models import Cigar
 
 # Create your models here.
 
@@ -19,3 +20,4 @@ class Scores(models.Model):
     speed = models.IntegerField()
     price = models.IntegerField()
     overall = models.IntegerField()
+    cigar = models.ForeignKey(Cigar, on_delete=models.CASCADE)
