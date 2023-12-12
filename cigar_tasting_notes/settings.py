@@ -116,6 +116,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 try:
-        from cigar_tasting_notes.local_setting import *
+        from cigar_tasting_notes.local_settings import *
 except ImportError:
         pass
